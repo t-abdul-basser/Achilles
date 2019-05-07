@@ -61,6 +61,7 @@
 #' @param conceptHierarchy                 (DEPRECATED) Boolean to determine if the concept_hierarchy result table should be created, for use by Atlas treemaps. Default is FALSE
 #'                                         Please note: this table creation only requires the Vocabulary, not the CDM itself. 
 #'                                         You could run this once for 1 Vocab version, and then copy the table to all CDMs using that Vocab.
+#' @param checkThemis                      Boolean to determine if conformance to Themis conventions should be checked. Default = TRUE
 #' 
 #' @return                                 An object of type \code{achillesResults} containing details for connecting to the database containing the results 
 #' @examples                               \dontrun{
@@ -73,7 +74,8 @@
 #'                                             cdmVersion = "5.3", 
 #'                                             runCostAnalysis = TRUE, 
 #'                                             numThreads = 10,
-#'                                             outputFolder = "output")
+#'                                             outputFolder = "output",
+#'                                             checkThemis = TRUE)
 #'                                         }
 #' @export
 achilles <- function (connectionDetails, 
@@ -96,7 +98,8 @@ achilles <- function (connectionDetails,
                       sqlOnly = FALSE,
                       outputFolder = "output",
                       verboseMode = TRUE,
-                      conceptHierarchy) {
+                      conceptHierarchy,
+                      checkThemis = FALSE) {
   
   achillesSql <- c()
   
@@ -648,6 +651,7 @@ achilles <- function (connectionDetails,
                                 tempHeelPrefix = "tmpheel",
                                 dropScratchTables = dropScratchTables,
                                 outputFolder = outputFolder,
+                                checkThemis = checkThemis,
                                 verboseMode = verboseMode)
     heelSql <- heelResults$heelSql
   }

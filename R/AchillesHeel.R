@@ -78,6 +78,7 @@ achillesHeel <- function(connectionDetails,
                          ThresholdMinimalPtMeasDxRx = 20.5,
                          outputFolder,
                          sqlOnly = FALSE,
+                         checkThemis = FALSE,
                          verboseMode = TRUE) {
   
   # Try to get CDM Version if not provided ----------------------------------------------------------------------------------------
@@ -285,7 +286,13 @@ achillesHeel <- function(connectionDetails,
   serialFiles <- read.csv(file = system.file("csv", "heel", "heel_rules_all.csv", package = "Achilles"), 
                           header = TRUE, stringsAsFactors = FALSE)
   
-  serialFiles <- serialFiles[serialFiles$execution_type == "serial", ]
+  # themis rule are heel rules of execution_type serial AND rule_type THEMIS --------------------------------------------------- 
+  if (checkThemis == TRUE)
+  {
+    serialFiles <- serialFiles[serialFiles$execution_type == "serial", ]
+  } else {
+    serialFiles <- serialFiles[serialFiles$execution_type == "serial" &  serialFiles$rule_type == "THEMIS"]
+  }
   
   for (i in 1:nrow(serialFiles)) {
     row <- serialFiles[i,]
