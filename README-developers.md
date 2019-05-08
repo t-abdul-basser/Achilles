@@ -197,3 +197,14 @@ Follow the conventions of existing Heel Results queries:  `select <fields> into 
 
 * The `@hrOldId` parameter refers to the serial file ID of the previous achilles_heel_results analysis. The achillesHeel function will assign this based on the rule_id.
 
+### How to Add a Themis Rule
+
+THEMIS is an OHDSI project that defines a series of conventions for implementation of a OMOP CDM database. Achilles can be used to check a OMOP CDM's conformance to THEMIS conventions. A THEMIS rule is an ACHILLES Heel analysis with rule_type THEMIS. please consult the section on "How To Add a Heel analysis" above. 
+
+1. To add a new Heel analysis, first determine whether its results will reside in the achilles_heel_results table, the achilles_results_derived table, or both. 
+
+2. The analysis should go into the *inst/sql/sql_server/heels/serial* folder. 
+
+3. Document the Heel analysis in the pertinent CSV files so that they are transparent and reachable by the achillesHeel function. The rule should be added to the *inst/csv/heel/heel_rules_all.csv* file; the rule_id will be important if this analysis needs to run in serial. If the rule includes derived details, add it to the *inst/csv/heel/heel_results_derived_details.csv* file; make sure to tag the rule_id in the ASSOCIATED_RULES field and create a new QUERY_ID to use as the SQL file name. If the rule includes a drilldown metric, include it in the *inst/csv/heel/heel_rules_drilldown.csv* file. 
+
+4. Use the conventions in "Heel SQL conventions"" aboveto write the SQL query. If the Heel analysis needs to run in serial, keep in mind the prerequisites for the new Heel analysis; does it rely upon the achilles_results_derived or achilles_heel_results tables at a specific stage of the achillesHeel execution? 
