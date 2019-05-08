@@ -49,6 +49,7 @@
 #' @param ThresholdMinimalPtMeasDxRx       The minimum percentage of patients with at least 1 Measurement, 1 Dx, and 1 Rx
 #' @param sqlOnly                          Boolean to determine if Heel should be fully executed. TRUE = just generate SQL files, don't actually run, FALSE = run Achilles Heel
 #' @param outputFolder                     Path to store logs and SQL files
+#' @param checkThemis                      Boolean to determine if conformance to Themis conventions should be checked. Default = TRUE
 #' @param verboseMode                      Boolean to determine if the console will show all execution steps. Default = TRUE  
 #' 
 #' @return The full Heel SQL code
@@ -61,7 +62,8 @@
 #'                                vocabDatabaseSchema = "vocab",
 #'                                cdmVersion = "5.3.0",
 #'                                numThreads = 10,
-#'                                outputFolder = "output")
+#'                                outputFolder = "output",
+#'                                checkThemis = TRUE)
 #' }
 #' @export
 achillesHeel <- function(connectionDetails, 
