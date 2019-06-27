@@ -15,9 +15,9 @@ addDataSource(jsonFolderPath, dataName = NULL, dataSourcePath = NULL,
 
 \item{dataSourcePath}{Path where datasource file will be saved. Default is one folder above the \code{jsonFolderPath}}
 
-\item{additionalParam}{A R list specifying which additinal parameters to write to the datasource object. Default is \code{list(cdmVersion=5)}.}
+\item{dataSourcesFileName}{Name of the file where the datasource is located or stored. Default is "datasources.json".}
 
-\item{dataSourcesFilename}{Name of the file where the datasource is located or stored. Default is "datasources.json".}
+\item{additionalParam}{A R list specifying which additinal parameters to write to the datasource object. Default is \code{list(cdmVersion=5)}.}
 }
 \value{
 none
