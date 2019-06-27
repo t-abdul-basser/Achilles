@@ -254,7 +254,8 @@ achilles <- function (connectionDetails,
   
   if (!createTable) {
     .deleteExistingResults(connectionDetails = connectionDetails, 
-                           analysisDetails = analysisDetails)  
+                           analysisDetails = analysisDetails,
+                           resultsDatabaseSchema = resultsDatabaseSchema)  
   }
   
   # Create analysis table -------------------------------------------------------------
@@ -1307,7 +1308,8 @@ dropAllScratchTables <- function(connectionDetails,
 }
 
 .deleteExistingResults <- function(connectionDetails,
-                                   analysisDetails) {
+                                   analysisDetails,
+                                   resultsDatabaseSchema) {
   
   
   resultIds <- analysisDetails$ANALYSIS_ID[analysisDetails$DISTRIBUTION == 0]
@@ -1337,7 +1339,7 @@ dropAllScratchTables <- function(connectionDetails,
 .getAchillesResultBenchmark <- function(analysisId,
                                         outputFolder) {
   
-  logs <- read.table(file = file.path(outputFolder, "log_achilles.txt"), 
+  logs <- utils::read.table(file = file.path(outputFolder, "log_achilles.txt"), 
                      header = FALSE, sep = "\t", stringsAsFactors = FALSE)
   names(logs) <- c("startTime", "thread", "logType", "package", "packageFunction", "comment")
   logs <- logs[grepl(pattern = "COMPLETE", x = logs$comment),]
